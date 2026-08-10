@@ -4,6 +4,7 @@ from typing import List
 from app.core.database import get_db
 from app.models.product import Product
 from app.schemas.product import ProductCreate, ProductResponse
+from app.core.auth import get_current_user
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
@@ -45,3 +46,7 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
     db.delete(product)
     db.commit()
     return {"message": "Product deleted successfully"}
+
+@router.get("/protected/test")
+def protected_route(user: dict = Depends(get_current_user)):
+    return {"message": "You are authenticated!", "user": user.get("username", user)}
