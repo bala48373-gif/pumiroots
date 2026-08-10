@@ -1,20 +1,22 @@
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Products from "./pages/Products";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
+import MyOrders from "./pages/MyOrders";
 
 function App({ authenticated }) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar authenticated={authenticated} />
-
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold text-gray-800">
-          Welcome to Pumiroots
-        </h2>
-        <p className="text-gray-600 mt-2">
-          {authenticated
-            ? "You are logged in!"
-            : "Please login to continue shopping."}
-        </p>
-      </div>
+      <Routes>
+        <Route path="/" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/my-orders" element={<MyOrders />} />
+      </Routes>
     </div>
   );
 }
