@@ -6,7 +6,7 @@ import useCartStore from "../store/cartStore";
 function Checkout() {
   const navigate = useNavigate();
   const items = useCartStore((state) => state.items);
-  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
+  const getTotalPrice = useCartStore((state) => state.getTotal);
   const clearCart = useCartStore((state) => state.clearCart);
 
   const [placing, setPlacing] = useState(false);
