@@ -1,13 +1,23 @@
+import { Link } from "react-router-dom";
 import keycloak from "../services/keycloak";
-import CartIcon from "./CartIcon";
+import useCartStore from "../store/cartStore";
 
 function Navbar({ authenticated }) {
+  const itemCount = useCartStore((state) => state.getItemCount());
+
   return (
     <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between">
       <h1 className="text-xl font-bold text-orange-700">Pumiroots</h1>
 
-      <div className="flex items-center gap-6">
-        <CartIcon />
+      <div className="flex items-center gap-4">
+        <Link to="/cart" className="relative text-gray-700">
+          🛒 Cart
+          {itemCount > 0 && (
+            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {itemCount}
+            </span>
+          )}
+        </Link>
 
         {authenticated ? (
           <>

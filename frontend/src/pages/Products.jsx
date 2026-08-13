@@ -6,7 +6,6 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
@@ -54,14 +53,7 @@ function Products() {
                 Stock: {product.stock}
               </p>
               <button
-                onClick={() =>
-                  addToCart({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    image: product.image_url || "",
-                  })
-                }
+                onClick={() => addToCart(product)}
                 className="mt-3 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
               >
                 Add to Cart
