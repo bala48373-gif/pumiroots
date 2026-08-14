@@ -11,7 +11,11 @@ function Root() {
 
   useEffect(() => {
     keycloak
-      .init({ onLoad: 'check-sso', pkceMethod: 'S256' })
+      .init({
+        onLoad: 'check-sso',
+        pkceMethod: 'S256',
+        checkLoginIframe: false,
+      })
       .then((auth) => {
         setAuthenticated(auth)
         setInitialized(true)
