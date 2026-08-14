@@ -19,6 +19,12 @@ function Navbar({ authenticated }) {
           )}
         </Link>
 
+        {authenticated && (
+          <Link to="/my-orders" className="text-gray-700 hover:text-orange-700">
+            My Orders
+          </Link>
+        )}
+
         {authenticated ? (
           <>
             <span className="text-gray-700">
