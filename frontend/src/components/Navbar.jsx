@@ -6,33 +6,41 @@ function Navbar({ authenticated }) {
   const itemCount = useCartStore((state) => state.getItemCount());
 
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between">
-      <h1 className="text-xl font-bold text-orange-700">Pumiroots</h1>
+    <nav className="bg-[#7A1526] px-6 py-4 flex items-center justify-between">
+      <h1
+        className="text-2xl text-white"
+        style={{ fontFamily: "'Playfair Display', serif" }}
+      >
+        Pumiroots
+      </h1>
 
-      <div className="flex items-center gap-4">
-        <Link to="/cart" className="relative text-gray-700">
+      <div className="flex items-center gap-6">
+        <Link to="/cart" className="relative text-[#EADFCB] hover:text-white transition-colors">
           🛒 Cart
           {itemCount > 0 && (
-            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-2 -right-3 bg-[#C89B3C] text-[#2A1815] text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
               {itemCount}
             </span>
           )}
         </Link>
 
         {authenticated && (
-          <Link to="/my-orders" className="text-gray-700 hover:text-orange-700">
+          <Link
+            to="/my-orders"
+            className="text-[#EADFCB] hover:text-white transition-colors"
+          >
             My Orders
           </Link>
         )}
 
         {authenticated ? (
           <>
-            <span className="text-gray-700">
+            <span className="text-[#EADFCB] text-sm">
               Hi, {keycloak.tokenParsed?.preferred_username}
             </span>
             <button
               onClick={() => keycloak.logout()}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              className="bg-[#C89B3C] text-[#2A1815] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#B8892E] transition-colors"
             >
               Logout
             </button>
@@ -41,13 +49,13 @@ function Navbar({ authenticated }) {
           <>
             <button
               onClick={() => keycloak.login()}
-              className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700"
+              className="bg-[#C89B3C] text-[#2A1815] px-4 py-2 rounded-md text-sm font-medium hover:bg-[#B8892E] transition-colors"
             >
               Login
             </button>
             <button
               onClick={() => keycloak.register()}
-              className="bg-white text-orange-600 border border-orange-600 px-4 py-2 rounded hover:bg-orange-50"
+              className="bg-transparent text-white border border-[#EADFCB] px-4 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition-colors"
             >
               Sign Up
             </button>
