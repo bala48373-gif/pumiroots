@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 import useCartStore from "../store/cartStore";
 
@@ -73,12 +74,17 @@ function Products() {
                 key={product.id}
                 className="bg-white rounded-lg border border-[#EADFCB] p-5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <h3
-                  className="text-lg text-[#2A1815] mb-1"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                <Link
+                  to={`/product/${product.id}`}
+                  className="block"
                 >
-                  {product.name}
-                </h3>
+                  <h3
+                    className="text-lg text-[#2A1815] mb-1 hover:text-[#7A1526] transition-colors"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
+                    {product.name}
+                  </h3>
+                </Link>
                 <p className="text-[#8B7355] text-sm mb-3 min-h-[2.5rem]">
                   {product.description}
                 </p>
