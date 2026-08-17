@@ -39,42 +39,64 @@ function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto p-6 text-center">
-        <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
+      <div className="min-h-screen bg-[#FBF6EE] flex items-center justify-center px-6">
+        <h2
+          className="text-2xl text-[#2A1815]"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
+          Your cart is empty
+        </h2>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
-
-      <div className="space-y-3 border rounded-lg p-4 mb-6">
-        {items.map((item) => (
-          <div key={item.id} className="flex justify-between text-sm">
-            <span>
-              {item.name} x {item.quantity}
-            </span>
-            <span>₹{(item.price * item.quantity).toFixed(2)}</span>
-          </div>
-        ))}
-        <div className="border-t pt-3 flex justify-between font-semibold">
-          <span>Total</span>
-          <span>₹{getTotalPrice().toFixed(2)}</span>
+    <div className="min-h-screen bg-[#FBF6EE] px-6 py-12">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-10">
+          <h2
+            className="text-3xl text-[#2A1815] mb-2"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Checkout
+          </h2>
+          <div className="w-10 h-[2px] bg-[#C89B3C] mx-auto" />
         </div>
+
+        <div className="space-y-3 bg-white border border-[#EADFCB] rounded-lg p-5 mb-6">
+          {items.map((item) => (
+            <div
+              key={item.id}
+              className="flex justify-between text-sm text-[#2A1815]"
+            >
+              <span>
+                {item.name} x {item.quantity}
+              </span>
+              <span className="text-[#C89B3C] font-medium">
+                ₹{(item.price * item.quantity).toFixed(2)}
+              </span>
+            </div>
+          ))}
+          <div className="border-t border-[#EADFCB] pt-3 flex justify-between items-center">
+            <span className="text-[#2A1815] font-medium">Total</span>
+            <span className="text-[#C89B3C] text-lg font-semibold">
+              ₹{getTotalPrice().toFixed(2)}
+            </span>
+          </div>
+        </div>
+
+        {error && (
+          <p className="text-[#A83246] text-sm mb-4 text-center">{error}</p>
+        )}
+
+        <button
+          onClick={handlePlaceOrder}
+          disabled={placing}
+          className="w-full bg-[#7A1526] text-white py-3 rounded-md text-sm tracking-wide hover:bg-[#5E0F1D] transition-colors disabled:opacity-50"
+        >
+          {placing ? "Placing Order..." : "Place Order"}
+        </button>
       </div>
-
-      {error && (
-        <p className="text-red-600 text-sm mb-4">{error}</p>
-      )}
-
-      <button
-        onClick={handlePlaceOrder}
-        disabled={placing}
-        className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 disabled:opacity-50"
-      >
-        {placing ? "Placing Order..." : "Place Order"}
-      </button>
     </div>
   );
 }
