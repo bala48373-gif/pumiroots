@@ -59,7 +59,7 @@ function Products() {
         )}
 
         {error && (
-          <p className="text-center text-red-700">{error}</p>
+          <p className="text-center text-[#A83246]">{error}</p>
         )}
 
         {!loading && !error && products.length === 0 && (

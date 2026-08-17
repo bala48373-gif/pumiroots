@@ -9,7 +9,7 @@ function CartIcon() {
     <Link to="/cart" className="relative">
       <ShoppingCart size={24} />
       {totalItems > 0 && (
-        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+        <span className="absolute -top-2 -right-2 bg-[#7A1526] text-[#C89B3C] text-xs rounded-full w-5 h-5 flex items-center justify-center">
           {totalItems}
         </span>
       )}
