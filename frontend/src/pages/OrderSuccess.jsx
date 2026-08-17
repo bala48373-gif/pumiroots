@@ -5,18 +5,36 @@ function OrderSuccess() {
   const order = location.state?.order;
 
   return (
-    <div className="max-w-2xl mx-auto p-6 text-center">
-      <h2 className="text-2xl font-semibold text-green-700 mb-2">
-        Order Placed Successfully!
-      </h2>
-      {order && (
-        <p className="text-gray-600 mb-4">
-          Order #{order.id} — Total: ₹{order.total_amount}
-        </p>
-      )}
-      <Link to="/" className="text-green-600 underline">
-        Continue shopping
-      </Link>
+    <div className="min-h-screen bg-[#FBF6EE] flex items-center justify-center px-6">
+      <div className="text-center">
+        <div className="w-14 h-14 rounded-full bg-[#7A1526] text-[#C89B3C] flex items-center justify-center mx-auto mb-6 text-2xl">
+          ✓
+        </div>
+
+        <h2
+          className="text-3xl text-[#2A1815] mb-2"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
+          Order Placed Successfully
+        </h2>
+        <div className="w-10 h-[2px] bg-[#C89B3C] mx-auto my-4" />
+
+        {order && (
+          <p className="text-[#8B7355] text-sm mb-6">
+            Order #{order.id} — Total{" "}
+            <span className="text-[#C89B3C] font-semibold">
+              ₹{order.total_amount}
+            </span>
+          </p>
+        )}
+
+        <Link
+          to="/"
+          className="inline-block bg-[#7A1526] text-white px-6 py-2.5 rounded-md text-sm tracking-wide hover:bg-[#5E0F1D] transition-colors"
+        >
+          Continue Shopping
+        </Link>
+      </div>
     </div>
   );
 }
