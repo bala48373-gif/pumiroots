@@ -15,6 +15,7 @@ class OrderCreate(BaseModel):
 class OrderItemOut(BaseModel):
     id: int
     product_id: int
+    product_name: str
     quantity: int
     price: float
 
