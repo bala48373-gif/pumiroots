@@ -4,12 +4,12 @@ from typing import List
 from app.core.database import get_db
 from app.models.product import Product
 from app.schemas.product import ProductCreate, ProductResponse
-from app.core.auth import get_current_user
+from app.core.auth import get_current_user, require_admin
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
 @router.post("/", response_model=ProductResponse)
-def create_product(product: ProductCreate, db: Session = Depends(get_db)):
+def create_product(product: ProductCreate, db: Session = Depends(get_db), user: dict = Depends(require_admin)):
     new_product = Product(**product.model_dump())
     db.add(new_product)
     db.commit()
@@ -28,7 +28,7 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
     return product
 
 @router.put("/{product_id}", response_model=ProductResponse)
-def update_product(product_id: int, updated: ProductCreate, db: Session = Depends(get_db)):
+def update_product(product_id: int, updated: ProductCreate, db: Session = Depends(get_db), user: dict = Depends(require_admin)):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
@@ -39,7 +39,7 @@ def update_product(product_id: int, updated: ProductCreate, db: Session = Depend
     return product
 
 @router.delete("/{product_id}")
-def delete_product(product_id: int, db: Session = Depends(get_db)):
+def delete_product(product_id: int, db: Session = Depends(get_db), user: dict = Depends(require_admin)):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")

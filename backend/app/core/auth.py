@@ -4,6 +4,7 @@ from app.core.keycloak import keycloak_openid
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+
 def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         token_info = keycloak_openid.decode_token(token, validate=True)
@@ -13,3 +14,13 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Could not validate credentials: {str(e)}",
         )
+
+
+def require_admin(current_user: dict = Depends(get_current_user)):
+    roles = current_user.get("realm_access", {}).get("roles", [])
+    if "admin" not in roles:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required",
+        )
+    return current_user
