@@ -96,7 +96,7 @@ function MyOrders() {
                     className="flex justify-between text-sm text-[#2A1815]"
                   >
                     <span>
-                      Product #{item.product_id} x {item.quantity}
+                      {item.product_name} x {item.quantity}
                     </span>
                     <span>₹{(item.price * item.quantity).toFixed(2)}</span>
                   </div>
