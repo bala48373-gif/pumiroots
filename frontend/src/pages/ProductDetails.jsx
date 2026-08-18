@@ -71,11 +71,11 @@ function ProductDetails() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
                     {/* Product Image */}
-                    <div className="bg-white rounded-lg border border-[#EADFCB] p-6 min-h-[400px] flex items-center justify-center">
+                    <div className="bg-white rounded-lg border border-[#EADFCB] overflow-hidden aspect-square">
                         <img
                             src={product.image_url || "/diya-set.png"}
                             alt={product.name}
-                            className="max-h-[450px] w-full object-contain"
+                            className="w-full h-full object-cover"
                         />
                     </div>
 
